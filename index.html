@@ -391,14 +391,20 @@ footer .brand b{color:var(--cream)}
 <div class="toast" id="toast"></div>
 
 <script src="data.js"></script>
+<script src="config.js"></script>
+<script src="catalogo.js"></script>
 <script>
 const D=window.LASUCRE;
 const brl=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const P=Object.fromEntries(D.produtos.map(p=>[p.id,p]));
-const WA_URL='https://wa.me/'+D.whatsapp;
-$('#fWa').href=WA_URL;$('#waFloat').href=WA_URL;$('#fIg').href='https://www.instagram.com/'+D.instagram+'/';
+let P={},DOCES=[],WA_URL='';
+function applyData(){
+  P=Object.fromEntries(D.produtos.map(p=>[p.id,p]));
+  DOCES=D.produtos.filter(p=>p.cat==='doces');
+  WA_URL='https://wa.me/'+D.whatsapp;
+  $('#fWa').href=WA_URL;$('#waFloat').href=WA_URL;$('#fIg').href='https://www.instagram.com/'+D.instagram+'/';
+}
 
 /* ---------- cardápio e natal ---------- */
 function cardHTML(p){
@@ -419,10 +425,9 @@ function mountGrid(sel,cat){
     addItem({key:p.id+'|'+(sel?sel.dataset.s:''),nome:p.nome,det:sel?sel.dataset.s:'',unit:p.preco,img:p.img||'img/logo-escuro.jpg'});
   };
 }
-mountGrid('#gridDoces','doces');mountGrid('#gridNatal','natal');
+function mountAll(){mountGrid('#gridDoces','doces');mountGrid('#gridNatal','natal')}
 
 /* ---------- cestas ---------- */
-const DOCES=D.produtos.filter(p=>p.cat==='doces');
 let C={tam:'M',slots:[],extra:{},msg:''};
 const cestaDe=t=>D.cestas.find(c=>c.id===t);
 function mkSlots(t){const a=[];cestaDe(t).itens.forEach(it=>{for(let i=0;i<it.qtd;i++)a.push({prod:it.prod,n:i+1,tot:it.qtd,sab:(P[it.prod].sabores||[''])[0]||''})});return a}
@@ -518,9 +523,14 @@ $('#openBag').onclick=openBag;$('#closeBag').onclick=closeBag;$('#ov').onclick=c
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBag()});
 let tt;function toast(s){const t=$('#toast');t.textContent=s;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)}
 
-setTam('M');renderBag();
 const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.1}):null;
-document.querySelectorAll('.reveal').forEach(el=>io?io.observe(el):el.classList.add('vis'));
+const watch=()=>document.querySelectorAll('.reveal:not(.vis)').forEach(el=>io?io.observe(el):el.classList.add('vis'));
+function boot(){
+  applyData();mountAll();
+  setTam(D.cestas.some(c=>c.id==='M')?'M':D.cestas[0].id);
+  renderBag();watch();
+}
+window.__ready.then(boot,boot);
 </script>
 </body>
 </html>

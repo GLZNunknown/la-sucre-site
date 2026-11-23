@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Painel · La Sucre</title>
+<link rel="icon" href="img/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--choc:#2a1712;--cocoa:#3d241b;--gold:#d9a47c;--champ:#f0d6bb;--cream:#fbf4ec;--paper:#fffaf5;--berry:#8e1f3a;--ink:#2f1d17;--muted:#8a7066;--line:#ead9cb;--ok:#22a35a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Lato,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;line-height:1.1}
+.wrap{width:min(960px,100% - 28px);margin:0 auto}
+.top{background:var(--choc);color:var(--cream);position:sticky;top:0;z-index:20}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px}
+.top .b{display:flex;align-items:center;gap:10px;font-family:"Cormorant Garamond";font-size:22px;font-weight:700;letter-spacing:.04em}
+.top .b img{width:38px;height:38px;border-radius:10px;object-fit:cover;object-position:top}
+.top a,.top button{font-size:14px;color:var(--champ);text-decoration:none;padding:8px 12px;border:1px solid rgba(217,164,124,.4);border-radius:999px}
+.top .r{display:flex;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;border-radius:999px;font-weight:700;font-size:14px;background:var(--choc);color:var(--cream)}
+.btn.gold{background:linear-gradient(135deg,#f3d2b0,#d9a47c 55%,#b47c55);color:var(--choc)}
+.btn.line{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.btn.red{background:#fff;border:1px solid #e6b8c2;color:var(--berry)}
+.btn:disabled{opacity:.5;cursor:wait}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}
+.login{max-width:400px;margin:12vh auto 0}
+.login h1{font-size:34px;margin-bottom:6px}
+.login p{color:var(--muted);margin-bottom:18px}
+label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin:12px 0 4px}
+input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:var(--paper);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+textarea{resize:vertical;min-height:84px}
+.err{color:var(--berry);font-size:14px;margin-top:10px;min-height:20px}
+.tabs{display:flex;gap:8px;margin:22px 0 16px;overflow:auto}
+.tabs button{padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:14px;white-space:nowrap}
+.tabs button[aria-selected=true]{background:var(--choc);color:var(--cream);border-color:var(--choc)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.bar h2{font-size:28px}
+.sec-t{font-family:Lato;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:22px 0 8px}
+.list{display:grid;gap:10px}
+.row{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px}
+.row.off{opacity:.55}
+.row img{width:64px;height:64px;border-radius:12px;object-fit:cover;background:var(--cocoa)}
+.row h3{font-size:20px}
+.row small{color:var(--muted);display:block;font-size:13px}
+.row .acts{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.ico{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:14px}
+.pill{font-size:11px;font-weight:700;border-radius:999px;padding:2px 9px;background:#f3e8dc;color:var(--cocoa)}
+.pill.n{background:#f6e3e8;color:var(--berry)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.ov{position:fixed;inset:0;background:rgba(30,15,10,.55);z-index:50;display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 12px}
+.ov.on{display:flex}
+.modal{background:var(--cream);border-radius:22px;width:min(640px,100%);padding:22px}
+.modal h2{font-size:30px;margin-bottom:4px}
+.foto{display:flex;gap:14px;align-items:center;margin-top:6px}
+.foto img{width:96px;height:96px;border-radius:14px;object-fit:cover;background:var(--cocoa)}
+.foto .a{display:grid;gap:8px}
+.chk{display:flex;align-items:center;gap:10px;margin-top:14px;font-weight:700;font-size:14px;color:var(--ink)}
+.chk input{width:20px;height:20px}
+.foot{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
+.it{display:grid;grid-template-columns:1fr 90px 36px;gap:8px;margin-bottom:8px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,160%);background:var(--choc);color:var(--cream);padding:13px 22px;border-radius:999px;z-index:90;transition:transform .3s;max-width:calc(100% - 24px)}
+.toast.on{transform:translate(-50%,0)}
+.toast.bad{background:var(--berry)}
+.hint{font-size:13px;color:var(--muted);margin-top:4px}
+@media(max-width:600px){.row{grid-template-columns:52px 1fr}.row img{width:52px;height:52px}.row .acts{grid-column:1/-1;justify-content:flex-start}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="login" class="wrap login" hidden>
+  <div class="card">
+    <h1>Painel La Sucre</h1>
+    <p>Entre para editar seus produtos, preços e fotos.</p>
+    <form id="fLogin">
+      <label for="em">E-mail</label><input id="em" type="email" required autocomplete="username">
+      <label for="pw">Senha</label><input id="pw" type="password" required autocomplete="current-password">
+      <div class="err" id="lerr"></div>
+      <button class="btn gold" style="width:100%;margin-top:8px" id="lbtn">Entrar</button>
+    </form>
+  </div>
+</div>
+
+<div id="semcfg" class="wrap login" hidden>
+  <div class="card"><h1>Falta conectar o banco</h1><p>Preencha o arquivo <b>config.js</b> com a URL e a chave do Supabase.</p></div>
+</div>
+
+<div id="app" hidden>
+  <header class="top"><div class="wrap">
+    <div class="b"><img src="img/logo-escuro.jpg" alt=""><span>Painel</span></div>
+    <div class="r"><a href="./" target="_blank" rel="noopener">Ver site</a><button id="out">Sair</button></div>
+  </div></header>
+  <main class="wrap">
+    <div class="tabs" role="tablist">
+      <button role="tab" data-tab="produtos" aria-selected="true">Produtos</button>
+      <button role="tab" data-tab="cestas" aria-selected="false">Cestas</button>
+      <button role="tab" data-tab="config" aria-selected="false">Configurações</button>
+    </div>
+    <div id="view"></div>
+  </main>
+</div>
+
+<div class="ov" id="ov"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script src="config.js"></script>
+<script>
+const C=window.LASUCRE_CFG||{};const BASE=C.url;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const brl=v=>(+v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const CAT={doces:'Doces artesanais',natal:'Cardápio de Natal'};
+let S=null,DB={produtos:[],cestas:[],config:{whatsapp:'',embalagem:{P:0,M:0,G:0,personalizada:0}}},tab='produtos';
+try{S=JSON.parse(localStorage.getItem('lasucre-sess')||'null')}catch(e){}
+
+/* ---------- API ---------- */
+async function auth(body,grant){
+  const r=await fetch(BASE+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{apikey:C.key,'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(j.error_description==='Invalid login credentials'||j.msg==='Invalid login credentials'?'E-mail ou senha incorretos.':(j.error_description||j.msg||'Não foi possível entrar.'));
+  S={access:j.access_token,refresh:j.refresh_token,exp:Date.now()+Math.max(60,j.expires_in-60)*1000,email:(j.user&&j.user.email)||''};
+  localStorage.setItem('lasucre-sess',JSON.stringify(S));
+}
+async function token(){if(S&&Date.now()>S.exp)await auth({refresh_token:S.refresh},'refresh_token');return S.access}
+async function api(path,opt={}){
+  const t=await token();
+  const r=await fetch(BASE+path,{...opt,headers:{apikey:C.key,Authorization:'Bearer '+t,'Content-Type':'application/json',...(opt.headers||{})}});
+  if(!r.ok){let m='';try{m=(await r.json()).message}catch(e){}throw new Error(m||('Erro '+r.status))}
+  const tx=await r.text();return tx?JSON.parse(tx):null;
+}
+const upsert=(tbl,obj)=>api(`/rest/v1/${tbl}?on_conflict=id`,{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(obj)});
+async function load(){
+  const [p,c,g]=await Promise.all([api('/rest/v1/produtos?select=*&order=ordem'),api('/rest/v1/cestas?select=*&order=ordem'),api('/rest/v1/config?select=*&id=eq.1')]);
+  DB.produtos=p;DB.cestas=c;if(g[0])DB.config=g[0];
+}
+let tt;function toast(m,bad){const t=$('#toast');t.textContent=m;t.className='toast on'+(bad?' bad':'');clearTimeout(tt);tt=setTimeout(()=>t.className='toast',2800)}
+
+/* ---------- foto ---------- */
+const imgSrc=u=>u||'img/logo-escuro.jpg';
+function resize(file,max=1400){return new Promise((ok,bad)=>{const im=new Image(),u=URL.createObjectURL(file);
+  im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);
+    c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>b?ok(b):bad(new Error('Imagem inválida')),'image/jpeg',.86)};
+  im.onerror=()=>bad(new Error('Não consegui ler essa imagem'));im.src=u})}
+async function enviarFoto(file,id){
+  const blob=await resize(file);const t=await token();const nome=`${id}-${Date.now()}.jpg`;
+  const r=await fetch(`${BASE}/storage/v1/object/fotos/${nome}`,{method:'POST',headers:{apikey:C.key,Authorization:'Bearer '+t,'Content-Type':'image/jpeg','x-upsert':'true'},body:blob});
+  if(!r.ok)throw new Error('Não consegui enviar a foto');
+  return `${BASE}/storage/v1/object/public/fotos/${nome}`;
+}
+
+/* ---------- telas ---------- */
+function render(){
+  document.querySelectorAll('.tabs [data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===tab));
+  $('#view').innerHTML=tab==='produtos'?vProdutos():tab==='cestas'?vCestas():vConfig();
+}
+function vProdutos(){
+  const grp=c=>DB.produtos.filter(p=>p.cat===c).map(p=>`<div class="row ${p.ativo?'':'off'}"><img src="${esc(imgSrc(p.img))}" alt="">
+    <div><h3>${esc(p.nome)}</h3><small>${brl(p.preco)} ${esc(p.unidade||'')}${(p.sabores||[]).length?' · '+(p.sabores||[]).length+' sabores':''}</small>${p.ativo?'':'<span class="pill n">escondido</span>'}</div>
+    <div class="acts"><button class="ico" data-up="${esc(p.id)}" aria-label="Subir">▲</button><button class="ico" data-down="${esc(p.id)}" aria-label="Descer">▼</button><button class="btn line" data-edit="${esc(p.id)}">Editar</button></div></div>`).join('')||'<p class="hint">Nenhum produto ainda.</p>';
+  return `<div class="bar"><h2>Produtos</h2><button class="btn gold" data-new>+ Novo produto</button></div>
+    <div class="sec-t">${CAT.doces}</div><div class="list">${grp('doces')}</div>
+    <div class="sec-t">${CAT.natal}</div><div class="list">${grp('natal')}</div>`;
+}
+function vCestas(){
+  const nome=id=>{const p=DB.produtos.find(x=>x.id===id);return p?p.curto||p.nome:id};
+  return `<div class="bar"><h2>Cestas</h2></div><div class="list">${DB.cestas.map(c=>`<div class="row ${c.ativo?'':'off'}" style="grid-template-columns:1fr auto"><div><h3>${esc(c.nome)} · ${brl(c.preco)}</h3>
+    <small>${(c.itens||[]).map(i=>i.qtd+'x '+esc(nome(i.prod))).join(', ')}</small>${c.ativo?'':'<span class="pill n">escondida</span>'}</div>
+    <div class="acts"><button class="btn line" data-cedit="${esc(c.id)}">Editar</button></div></div>`).join('')}</div>
+    <p class="hint" style="margin-top:12px">A cesta personalizada (o cliente monta do zero) é calculada pelo valor dos produtos + embalagem.</p>`;
+}
+function vConfig(){
+  const e=DB.config.embalagem||{};
+  return `<div class="bar"><h2>Configurações</h2></div><form class="card" id="fCfg">
+    <label>WhatsApp que recebe os pedidos (com DDI e DDD, só números)</label><input id="cWa" inputmode="numeric" value="${esc(DB.config.whatsapp)}">
+    <div class="sec-t">Valor da embalagem das cestas</div><p class="hint">Use 0 para não cobrar. O valor é somado ao total da cesta.</p>
+    <div class="grid2"><div><label>Cesta P (R$)</label><input data-emb="P" inputmode="decimal" value="${esc(e.P||0)}"></div><div><label>Cesta M (R$)</label><input data-emb="M" inputmode="decimal" value="${esc(e.M||0)}"></div>
+    <div><label>Cesta G (R$)</label><input data-emb="G" inputmode="decimal" value="${esc(e.G||0)}"></div><div><label>Cesta personalizada (R$)</label><input data-emb="personalizada" inputmode="decimal" value="${esc(e.personalizada||0)}"></div></div>
+    <div class="foot"><span></span><button class="btn gold">Salvar</button></div></form>`;
+}
+
+/* ---------- modal: produto ---------- */
+let ED=null;
+const num=v=>{const n=parseFloat(String(v).replace(/\./g,'').replace(',','.'));return isNaN(n)?NaN:n};
+const slug=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,30)||'produto';
+function openProd(id){
+  const p=id?DB.produtos.find(x=>x.id===id):null;
+  ED=p?{...p,sabores:[...(p.sabores||[])]}:{id:'',cat:'doces',nome:'',curto:'',preco:'',unidade:'a unidade',descricao:'',sabores:[],img:'',ordem:DB.produtos.length+1,ativo:true,novo:true};
+  $('#modal').innerHTML=`<h2>${p?'Editar produto':'Novo produto'}</h2><form id="fProd">
+    <label>Nome</label><input id="pNome" required maxlength="80" value="${esc(ED.nome)}">
+    <div class="grid2"><div><label>Categoria</label><select id="pCat"><option value="doces" ${ED.cat==='doces'?'selected':''}>Doces artesanais</option><option value="natal" ${ED.cat==='natal'?'selected':''}>Cardápio de Natal</option></select></div>
+    <div><label>Preço (R$)</label><input id="pPreco" required inputmode="decimal" placeholder="4,50" value="${ED.preco===''?'':esc(String(ED.preco).replace('.',','))}"></div>
+    <div><label>Vendido por</label><input id="pUn" maxlength="30" placeholder="a unidade, o pote, a travessa" value="${esc(ED.unidade)}"></div>
+    <div><label>Nome curto (nas cestas)</label><input id="pCurto" maxlength="40" placeholder="opcional" value="${esc(ED.curto)}"></div></div>
+    <label>Descrição</label><input id="pDesc" maxlength="160" value="${esc(ED.descricao)}">
+    <label>Sabores (um por linha)</label><textarea id="pSab" placeholder="Brigadeiro&#10;Maracujá">${esc(ED.sabores.join('\n'))}</textarea>
+    <label>Foto</label><div class="foto"><img id="pImg" src="${esc(imgSrc(ED.img))}" alt=""><div class="a"><label class="btn line" style="margin:0;cursor:pointer">Escolher foto<input id="pFile" type="file" accept="image/*" hidden></label><button type="button" class="btn red" id="pRm">Remover foto</button></div></div>
+    <label class="chk"><input type="checkbox" id="pAtivo" ${ED.ativo?'checked':''}>Mostrar no site</label>
+    <div class="foot"><div>${p?'<button type="button" class="btn red" id="pDel">Excluir</button>':''}</div><div style="display:flex;gap:8px"><button type="button" class="btn line" data-close>Cancelar</button><button class="btn gold" id="pSave">Salvar</button></div></div></form>`;
+  $('#ov').classList.add('on');
+}
+function closeModal(){$('#ov').classList.remove('on');ED=null}
+
+/* ---------- modal: cesta ---------- */
+function openCesta(id){
+  const c=DB.cestas.find(x=>x.id===id);ED={...c,itens:(c.itens||[]).map(i=>({...i}))};drawCesta();$('#ov').classList.add('on');
+}
+function drawCesta(){
+  const opts=sel=>DB.produtos.filter(p=>p.cat==='doces'||p.id===sel).map(p=>`<option value="${esc(p.id)}" ${p.id===sel?'selected':''}>${esc(p.nome)}</option>`).join('');
+  $('#modal').innerHTML=`<h2>${esc(ED.nome)}</h2><form id="fCesta">
+    <div class="grid2"><div><label>Nome</label><input id="cNome" required value="${esc(ED.nome)}"></div><div><label>Preço (R$)</label><input id="cPreco" required inputmode="decimal" value="${esc(String(ED.preco).replace('.',','))}"></div></div>
+    <div class="sec-t">O que vem na cesta</div>
+    ${ED.itens.map((it,i)=>`<div class="it"><select data-ip="${i}">${opts(it.prod)}</select><input data-iq="${i}" type="number" min="1" max="30" value="${it.qtd}"><button type="button" class="ico" data-irm="${i}" aria-label="Remover">×</button></div>`).join('')}
+    <button type="button" class="btn line" id="cAddIt">+ Adicionar item</button>
+    <label class="chk"><input type="checkbox" id="cAtivo" ${ED.ativo?'checked':''}>Mostrar no site</label>
+    <div class="foot"><span></span><div style="display:flex;gap:8px"><button type="button" class="btn line" data-close>Cancelar</button><button class="btn gold">Salvar</button></div></div></form>`;
+}
+
+/* ---------- eventos ---------- */
+document.addEventListener('click',async e=>{
+  const t=e.target;
+  if(t.closest('[data-close]')||t.id==='ov'){closeModal();return}
+  const tabB=t.closest('[data-tab]');if(tabB){tab=tabB.dataset.tab;render();return}
+  if(t.closest('[data-new]'))return openProd();
+  const ed=t.closest('[data-edit]');if(ed)return openProd(ed.dataset.edit);
+  const ce=t.closest('[data-cedit]');if(ce)return openCesta(ce.dataset.cedit);
+  const mv=t.closest('[data-up],[data-down]');
+  if(mv){
+    const id=mv.dataset.up||mv.dataset.down,dir=mv.dataset.up?-1:1;
+    const p=DB.produtos.find(x=>x.id===id),lista=DB.produtos.filter(x=>x.cat===p.cat);
+    const i=lista.findIndex(x=>x.id===id),o=lista[i+dir];if(!o)return;
+    const a=p.ordem,b=o.ordem;
+    try{await Promise.all([api(`/rest/v1/produtos?id=eq.${encodeURIComponent(p.id)}`,{method:'PATCH',body:JSON.stringify({ordem:b})}),api(`/rest/v1/produtos?id=eq.${encodeURIComponent(o.id)}`,{method:'PATCH',body:JSON.stringify({ordem:a})})]);
+      await load();render()}catch(er){toast(er.message,1)}
+    return;
+  }
+  if(t.id==='pRm'){ED.img='';$('#pImg').src=imgSrc('');return}
+  if(t.id==='pDel'){
+    if(DB.cestas.some(c=>(c.itens||[]).some(i=>i.prod===ED.id)))return toast('Esse produto está dentro de uma cesta. Tire ele da cesta antes.',1);
+    if(!confirm(`Excluir "${ED.nome}"? Isso não dá para desfazer.`))return;
+    try{await api(`/rest/v1/produtos?id=eq.${encodeURIComponent(ED.id)}`,{method:'DELETE'});closeModal();await load();render();toast('Produto excluído')}catch(er){toast(er.message,1)}
+    return;
+  }
+  if(t.id==='cAddIt'){syncCesta();const p=DB.produtos.find(x=>x.cat==='doces');ED.itens.push({prod:p?p.id:'',qtd:1});drawCesta();return}
+  const rm=t.closest('[data-irm]');if(rm){syncCesta();ED.itens.splice(+rm.dataset.irm,1);drawCesta();return}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function syncCesta(){
+  ED.nome=$('#cNome').value;ED.preco=$('#cPreco').value;ED.ativo=$('#cAtivo').checked;
+  document.querySelectorAll('[data-ip]').forEach(s=>ED.itens[+s.dataset.ip].prod=s.value);
+  document.querySelectorAll('[data-iq]').forEach(s=>ED.itens[+s.dataset.iq].qtd=Math.max(1,parseInt(s.value)||1));
+}
+document.addEventListener('change',async e=>{
+  if(e.target.id==='pFile'&&e.target.files[0]){
+    try{toast('Enviando foto...');const id=ED.id||slug($('#pNome').value||'produto');ED.img=await enviarFoto(e.target.files[0],id);$('#pImg').src=ED.img;toast('Foto enviada')}catch(er){toast(er.message,1)}
+  }
+});
+document.addEventListener('submit',async e=>{
+  e.preventDefault();const f=e.target.id;
+  const btn=e.target.querySelector('button.gold');btn&&(btn.disabled=true);
+  try{
+    if(f==='fProd'){
+      const preco=num($('#pPreco').value);if(isNaN(preco)||preco<0)throw new Error('Preço inválido');
+      const nome=$('#pNome').value.trim();if(!nome)throw new Error('Informe o nome');
+      const id=ED.novo?(slug(nome)+'-'+Math.random().toString(36).slice(2,5)):ED.id;
+      const sab=$('#pSab').value.split('\n').map(s=>s.trim()).filter(Boolean);
+      await upsert('produtos',{id,cat:$('#pCat').value,nome,curto:$('#pCurto').value.trim()||null,preco,unidade:$('#pUn').value.trim(),descricao:$('#pDesc').value.trim(),sabores:sab,img:ED.img||'',ordem:ED.ordem,ativo:$('#pAtivo').checked});
+      closeModal();await load();render();toast('Produto salvo');
+    }else if(f==='fCesta'){
+      syncCesta();const preco=num(ED.preco);if(isNaN(preco)||preco<0)throw new Error('Preço inválido');
+      if(!ED.itens.length)throw new Error('Coloque pelo menos um item na cesta');
+      await upsert('cestas',{id:ED.id,nome:ED.nome.trim(),preco,itens:ED.itens,ordem:ED.ordem,ativo:ED.ativo});
+      closeModal();await load();render();toast('Cesta salva');
+    }else if(f==='fCfg'){
+      const emb={};document.querySelectorAll('[data-emb]').forEach(i=>{const n=num(i.value||0);if(isNaN(n)||n<0)throw new Error('Valor de embalagem inválido');emb[i.dataset.emb]=n});
+      const wa=$('#cWa').value.replace(/\D/g,'');if(wa.length<12)throw new Error('WhatsApp incompleto (use 55 + DDD + número)');
+      await upsert('config',{id:1,whatsapp:wa,embalagem:emb});await load();render();toast('Configurações salvas');
+    }else if(f==='fLogin'){
+      $('#lerr').textContent='';await auth({email:$('#em').value.trim(),password:$('#pw').value},'password');await entrar();
+    }
+  }catch(er){f==='fLogin'?($('#lerr').textContent=er.message):toast(er.message,1)}
+  btn&&(btn.disabled=false);
+});
+$('#out').onclick=()=>{S=null;localStorage.removeItem('lasucre-sess');location.reload()};
+
+/* ---------- início ---------- */
+async function entrar(){
+  try{await load()}catch(er){S=null;localStorage.removeItem('lasucre-sess');$('#app').hidden=true;$('#login').hidden=false;$('#lerr').textContent='Sessão expirada. Entre de novo.';return}
+  $('#login').hidden=true;$('#app').hidden=false;render();
+}
+(function init(){
+  if(!C.url||!C.key||C.url.includes('SEU-PROJETO')){$('#semcfg').hidden=false;return}
+  S?entrar():($('#login').hidden=false);
+})();
+</script>
+</body>
+</html>

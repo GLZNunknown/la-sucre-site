@@ -75,3 +75,9 @@ insert into public.produtos (id,cat,nome,curto,preco,unidade,descricao,sabores,i
 insert into public.cestas (id,nome,preco,itens,ordem) values ('P','Cesta P',45,'[{"prod":"trufa","qtd":2},{"prod":"minitorta","qtd":1},{"prod":"ddl","qtd":1}]'::jsonb,1) on conflict (id) do nothing;
 insert into public.cestas (id,nome,preco,itens,ordem) values ('M','Cesta M',75,'[{"prod":"trufa","qtd":4},{"prod":"barra","qtd":1},{"prod":"ddl","qtd":1}]'::jsonb,2) on conflict (id) do nothing;
 insert into public.cestas (id,nome,preco,itens,ordem) values ('G','Cesta G',125,'[{"prod":"trufa","qtd":6},{"prod":"barra","qtd":1},{"prod":"ddl","qtd":1},{"prod":"mousse","qtd":1}]'::jsonb,3) on conflict (id) do nothing;
+-- Permissões das tabelas (projetos novos do Supabase não liberam por padrão).
+-- A segurança de verdade continua nas regras (RLS) do schema.sql:
+-- qualquer pessoa só LÊ; só quem está logado edita.
+grant usage on schema public to anon, authenticated;
+grant select on public.produtos, public.cestas, public.config to anon;
+grant select, insert, update, delete on public.produtos, public.cestas, public.config to authenticated;

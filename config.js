@@ -1,6 +1,6 @@
-/* Conexão com o banco (Supabase). Preencha depois de criar o projeto.
-   A chave "anon" é pública e pode ficar aqui: quem manda é a segurança (RLS) do banco. */
+/* Conexão com o banco (Supabase).
+   A chave "publishable" é pública e pode ficar aqui: quem manda é a segurança (RLS) do banco. */
 window.LASUCRE_CFG = {
-  url: 'https://SEU-PROJETO.supabase.co',
-  key: 'SUA-CHAVE-ANON'
+  url: 'https://fcstgtyyxgnwfjbskyus.supabase.co',
+  key: 'sb_publishable_36ttTUzUoH7Y6d2phvtooA_-PA7wfeW'
 };

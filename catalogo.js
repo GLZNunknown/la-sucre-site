@@ -22,7 +22,8 @@
   }
 
   function buscar() {
-    var H = { apikey: C.key, Authorization: 'Bearer ' + C.key };
+    var H = { apikey: C.key };
+    if (/^eyJ/.test(C.key)) H.Authorization = 'Bearer ' + C.key; /* chave antiga (JWT); a nova "sb_publishable" vai só no apikey */
     function get(q) { return fetch(C.url + '/rest/v1/' + q, { headers: H }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }
     return Promise.all([
       get('produtos?select=*&ativo=eq.true&order=ordem'),
